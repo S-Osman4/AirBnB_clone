@@ -21,21 +21,28 @@ class FileStorage:
     __objects = {}
 
     def all(self):
-        """Public method that returns all objects from the dictionary __objects"""
+        """Public method that returns all objects from 
+        the dictionary __objects
+        """
         return self.__objects
 
     def new(self, obj):
-        """Public method that sets in __objects the obj with key <obj class name>.id"""
+        """Public method that sets in __objects
+        with key <obj class name>.id
+        """
         self.__objects["{}.{}".format(obj.__class__.__name__, obj.id)] = obj
 
     def save(self):
-        """Public method that serializes __objects to the JSON file (path: __file_path)"""
+        """Public method that serializes __objects
+        to the JSON file (path: __file_path)
+        """
         with open(self.__file_path, "w", encoding="UTF-8") as f:
             obj_dict = {k: v.to_dict() for k, v in self.__objects.items()}
             json.dump(obj_dict, f)
 
     def reload(self):
-        """Public method that deserializes the JSON file to __objects, only if the JSON
+        """Public method that deserializes the 
+        JSON file to __objects, only if the JSON
         file (__file_path) exists. Otherwise, do nothing.
         """
         classes = {
