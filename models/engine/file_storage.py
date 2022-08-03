@@ -21,7 +21,7 @@ class FileStorage:
     __objects = {}
 
     def all(self):
-        """Public method that returns all objects from 
+        """Public method that returns all objects from
         the dictionary __objects
         """
         return self.__objects
@@ -41,7 +41,7 @@ class FileStorage:
             json.dump(obj_dict, f)
 
     def reload(self):
-        """Public method that deserializes the 
+        """Public method that deserializes the
         JSON file to __objects, only if the JSON
         file (__file_path) exists. Otherwise, do nothing.
         """
