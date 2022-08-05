@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 #!/usr/bin/python3
 """This is the console for AirBnB"""
 import cmd
@@ -227,4 +226,3 @@ class HBNBCommand(cmd.Cmd):
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
->>>>>>> df4bf6928c87ad2b5aa5e3afef70def3afa20753
