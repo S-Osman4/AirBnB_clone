@@ -39,9 +39,10 @@ class HBNBCommand(cmd.Cmd):
         elif args not in HBNBCommand.all_classes:
             print('** class doesn\'t exist **')
         else:
-            classes = {'BaseModel': BaseModel, 'User': User, 'Amenity': Amenity,
-                     'City': City, 'Place': Place,
-                     'Review': Review, 'State': State}
+            classes = {'BaseModel': BaseModel, 'User': User,
+                       'Amenity': Amenity,
+                       'City': City, 'Place': Place,
+                       'Review': Review, 'State': State}
             new_obj = classes[args]()
             new_obj.save()
             print('{}'.format(new_obj.id))
