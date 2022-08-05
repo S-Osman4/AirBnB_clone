@@ -34,57 +34,56 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, arg):
         """Create a new instance of a class"""
-        args = parse(arg)
         if not args:
-            print("** class name missing **")
-        elif args[0] not in HBNBCommand.classes:
-            print("** class doesn't exist **")
+            print('** class name missing **')
+        elif args not in HBNBCommand.all_classes:
+            print('** class doesn\'t exist **')
         else:
-            obj = HBNBCommand.classes[args[0]]()
-            obj.save()
-            print(obj.id)
+            classes = {'BaseModel': BaseModel, 'User': User, 'Amenity': Amenity,
+                     'City': City, 'Place': Place,
+                     'Review': Review, 'State': State}
+            new_obj = classes[args]()
+            new_obj.save()
+            print('{}'.format(new_obj.id))
+            storage.save()
 
     def do_show(self, arg):
         """Prints the string representation of an instance"""
-        args = parse(arg)
-        if not args:
+        arg = line.split()
+        obj_dict = storage.all()
+        if len(arg) == 0:
             print("** class name missing **")
-        elif args[0] not in HBNBCommand.classes:
+        elif arg[0] not in HBNBCommand.__classes:
             print("** class doesn't exist **")
-        elif len(args) < 2:
+        elif len(arg) == 1:
             print("** instance id missing **")
-        else:
-            objects = models.storage.all()
-            ' k = key, v = value'
-            for k, v in objects.items():
-                obj_id = objects[k].id
-                obj_class = objects[k].__class__.__name__
-                if obj_id == args[1] and args[0] == obj_class:
-                    print(objects[k])
-                    return
+        elif "{}.{}".format(arg[0], arg[1]) not in obj_dict:
             print("** no instance found **")
+        else:
+            print(obj_dict["{}.{}".format(arg[0], arg[1])])
 
     def do_destroy(self, arg):
         """Deletes an instance based on the class name and id"""
-        args = parse(arg)
-        if not args:
-            print("** class name missing **")
-        elif args[0] not in HBNBCommand.classes:
+        clsname, obj_id = None, None
+        args = arg.split(' ')
+        if len(args) > 0:
+            clsname = args[0]
+        if len(args) > 1:
+            obj_id = args[1]
+        if not clsname:
+            print('** class name missing **')
+        elif not obj_id:
+            print('** instance id missing **')
+        elif not self.clslist.get(clsname):
             print("** class doesn't exist **")
-        elif len(args) < 2:
-            print("** instance id missing **")
         else:
-            objects = models.storage.all()
-            'k = key, v = value'
-            for k, v in objects.items():
-                obj_id = objects[k].id
-                obj_class = objects[k].__class__.__name__
-                if obj_id == args[1] and args[0] == obj_class:
-                    del objects[k]
-                    models.storage.save()
-                    break
+            k = clsname + "." + obj_id
+            obj = models.storage.all().get(k)
+            if not obj:
+                print('** no instance found **')
             else:
-                print("** no instance found **")
+                del models.storage.all()[k]
+                models.storage.save()
 
     def do_all(self, arg):
         """Prints all string representation of all instances"""
