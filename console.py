@@ -64,7 +64,7 @@ class HBNBCommand(cmd.Cmd):
                     print(objects[k])
                     return
             print("** no instance found **")
-            
+
     def do_destroy(self, arg):
         """Deletes an instance based on the class name and id"""
         args = parse(arg)
@@ -86,7 +86,7 @@ class HBNBCommand(cmd.Cmd):
                     break
             else:
                 print("** no instance found **")
-                
+
     def do_all(self, arg):
         """Prints all string representation of all instances"""
         args = parse(arg)
@@ -108,8 +108,7 @@ class HBNBCommand(cmd.Cmd):
                 print(obj_list)
             else:
                 if args[0] not in HBNBCommand.classes:
-                    print("** class doesn't exist **")
-                
+
     def do_count(self, arg):
         """Retrieves the number of instances of a class"""
         args = parse(arg)
