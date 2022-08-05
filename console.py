@@ -108,20 +108,7 @@ class HBNBCommand(cmd.Cmd):
                 print(obj_list)
             else:
                 if args[0] not in HBNBCommand.classes:
-                
-        def do_count(self, arg):
-        """Retrieves the number of instances of a class"""
-        args = parse(arg)
-        objects = models.storage.all()
-        count = 0
-        if not args:
-            print("** class name missing **")
-        else:
-            'k = key, v = value'
-            for k, v in objects.items():
-                if objects[k].__class__.__name__ == args[0]:
-                    count += 1
-            print(count)
+                    print("** class doesn't exist **")
 
 
 if __name__ == '__main__':
