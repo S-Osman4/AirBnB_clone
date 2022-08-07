@@ -5,6 +5,7 @@ This module contains unit tests for class BaseModel
 import unittest
 import io
 import sys
+import pep8
 from datetime import datetime
 from models.base_model import BaseModel
 import models
@@ -27,6 +28,14 @@ class TestBaseModel(unittest.TestCase):
         self.assertTrue(hasattr(self.base1, "id"))
         self.assertEqual(type(self.base1.id), str)
         self.assertEqual(type(self.base2.id), str)
+        
+    def test_pep8_conformance_model(self):
+        """
+        Test that we conform to PEP8.
+        """
+        pep8style = pep8.StyleGuide(quiet=True)
+        result = pep8style.check_files(['models/base_model.py'])
+        self.assertEqual(result.total_errors, 0, "Fix pep8 in base_model.py")
 
     def test_instance(self):
         self.assertTrue(isinstance(self.base1, BaseModel))
