@@ -44,7 +44,7 @@ class HBNBCommand(cmd.Cmd):
         args = arg.split(' ')
         if not args:
             print('** class name missing **')
-        elif args not in HBNBCommand.all_classes:
+        elif args not in HBNBCommand.classes:
             print('** class doesn\'t exist **')
         else:
             classes = {'BaseModel': BaseModel, 'User': User,
