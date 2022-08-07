@@ -192,3 +192,6 @@ tests/test_models/ | Contains unittests files to test classes in dir `models/`
 tests/test_models/test_engine | Contains unittest files to test classes in dir `engine/`
 
 ## Authors
+
+ Shamso Osman 
+ Eric Botchway
