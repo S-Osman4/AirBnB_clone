@@ -101,7 +101,14 @@ example
 Prints a string representation of a class instance based on a given id.
 
 ```
-example
+hbnb) show BaseModel My_very_First_Model                                              
+** no instance found **
+
+```
+
+```
+(hbnb) show BaseModel                                                                  
+** instance id missing **  
 ```
 
 * **destroy**
@@ -110,7 +117,9 @@ Deletes a class instance based on a given id from the storage file file.json and
 it is updated accordingly.
 
 ```
-example
+(hbnb) destroy                                                                   
+** class name missing **                                                         
+
 ```
 
 * **all**
