@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """This is the console for AirBnB"""
+
 import cmd
 from models.base_model import BaseModel
 from models.user import User
@@ -86,28 +87,29 @@ class HBNBCommand(cmd.Cmd):
                 del models.storage.all()[k]
                 models.storage.save()
 
-    def do_all(self, arg):
-        """Prints all string representation of all instances"""
-        args = parse(arg)
-        objects = models.storage.all()
-        if not args:
-            obj_list = []
-            ' k = key, v = value'
-            for k, v in objects.items():
-                obj_list.append(str(objects[k]))
-            if obj_list:
-                print(obj_list)
-        else:
-            obj_list = []
-            'k = key, v = value'
-            for k, v in objects.items():
-                if objects[k].__class__.__name__ == args[0]:
-                    obj_list.append(str(objects[k]))
-            if obj_list:
-                print(obj_list)
-            else:
-                if args[0] not in HBNBCommand.classes:
-                    print("** class doesn't exist **")
+    def do_all(self, inputs):
+        """ The command all prints all string representation
+        of all instances based or not on the class name
+        """
+        all_objs = storage.all()
+        list_obj = []
+        if not(inputs):
+            if all_objs == {}:
+                print("[]")
+                return
+            for key in storage._FileStorage__objects:
+                list_obj.append(str(storage._FileStorage__objects[key]))
+            print(list_obj)
+            return
+        try:
+            cl = all_classes[inputs]
+        except Exception:
+            print("** class doesn't exist **")
+            return
+        for key in storage._FileStorage__objects:
+            if key.split('.')[0] == inputs:
+                list_obj.append(str(storage._FileStorage__objects[key]))
+        print(list_obj)
 
 
 if __name__ == '__main__':
