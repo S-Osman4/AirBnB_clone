@@ -99,11 +99,11 @@ class HBNBCommand(cmd.Cmd):
         if not arg:
             print([str(v) for k, v in models.storage.all().items()])
         else:
-            if not self.clslist.get(arg):
+            if not self.classes.get(arg):
                 print("** class doesn't exist **")
                 return False
             print([str(v) for k, v in models.storage.all().items()
-                   if type(v) is self.clslist.get(arg)])
+                   if type(v) is self.classes.get(arg)])
             
             
 if __name__ == '__main__':
