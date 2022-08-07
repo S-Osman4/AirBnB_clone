@@ -39,22 +39,19 @@ class HBNBCommand(cmd.Cmd):
         'Exit command to exit the program'
         return True
 
-    def do_create(self, arg):
-        """Create a new instance of a class"""
-        args = arg.split(' ')
-        if not args:
-            print('** class name missing **')
-        elif args not in HBNBCommand.classes:
-            print('** class doesn\'t exist **')
+    def do_create(self, inputs):
+        """ Creates a new instance of BaseModel,
+        saves it (to the JSON file) and prints the id """
+        if not(inputs):
+            print("** class name missing **")
         else:
-            classes = {'BaseModel': BaseModel, 'User': User,
-                       'Amenity': Amenity,
-                       'City': City, 'Place': Place,
-                       'Review': Review, 'State': State}
-            new_obj = classes[args]()
-            new_obj.save()
-            print('{}'.format(new_obj.id))
-            storage.save()
+            try:
+                if classes[inputs]:
+                    instance = classes[inputs]()
+                    instance.save()
+                    print(instance.id)
+            except Exception:
+                print("** class doesn't exist **")
 
     def do_show(self, arg):
         """Prints the string representation of an instance"""
